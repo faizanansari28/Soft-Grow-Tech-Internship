@@ -1,21 +1,8 @@
-# ============================================================
-#   PROJECT 1 – Text Sentiment Analyzer
-#   SoftGrowTech Internship | Task 2
-#   Uses: TextBlob + NLTK (VADER)
-# ============================================================
-
 import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from textblob import TextBlob
-
-# Download required NLTK data (runs once)
 nltk.download('vader_lexicon', quiet=True)
 nltk.download('punkt', quiet=True)
-
-
-# ─────────────────────────────────────────────
-#  Helper: Classify using VADER (NLTK)
-# ─────────────────────────────────────────────
 def analyze_with_vader(text: str) -> dict:
     """
     Uses NLTK's VADER (Valence Aware Dictionary and sEntiment Reasoner).
@@ -40,11 +27,6 @@ def analyze_with_vader(text: str) -> dict:
         "negative": round(scores['neg'], 4),
         "neutral":  round(scores['neu'], 4),
     }
-
-
-# ─────────────────────────────────────────────
-#  Helper: Classify using TextBlob
-# ─────────────────────────────────────────────
 def analyze_with_textblob(text: str) -> dict:
     """
     Uses TextBlob pattern-based analysis.
@@ -67,10 +49,6 @@ def analyze_with_textblob(text: str) -> dict:
         "subjectivity": round(subjectivity, 4),
     }
 
-
-# ─────────────────────────────────────────────
-#  Display results in a formatted box
-# ─────────────────────────────────────────────
 def display_results(text: str, vader: dict, tb: dict) -> None:
     print("\n" + "=" * 55)
     print("  SENTIMENT ANALYSIS RESULTS")
@@ -87,11 +65,6 @@ def display_results(text: str, vader: dict, tb: dict) -> None:
     print(f"  Polarity   : {tb['polarity']:+.4f}  "
           f"(Subjectivity={tb['subjectivity']:.4f})")
     print("=" * 55 + "\n")
-
-
-# ─────────────────────────────────────────────
-#  Demo with sample sentences
-# ─────────────────────────────────────────────
 def run_demo():
     samples = [
         "I absolutely love this product! It exceeded all my expectations.",
@@ -101,7 +74,6 @@ def run_demo():
         "Amazing service! Will definitely recommend to all my friends.",
         "I hate waiting in long queues, it is so frustrating!",
     ]
-
     print("\n" + "★" * 55)
     print("   TEXT SENTIMENT ANALYZER  –  SoftGrowTech Task 2")
     print("★" * 55)
@@ -111,11 +83,6 @@ def run_demo():
         vader_result = analyze_with_vader(sentence)
         tb_result    = analyze_with_textblob(sentence)
         display_results(sentence, vader_result, tb_result)
-
-
-# ─────────────────────────────────────────────
-#  Interactive mode
-# ─────────────────────────────────────────────
 def interactive_mode():
     print("\n" + "─" * 55)
     print("  INTERACTIVE MODE  (type 'quit' to exit)")
@@ -133,11 +100,6 @@ def interactive_mode():
         vader_result = analyze_with_vader(text)
         tb_result    = analyze_with_textblob(text)
         display_results(text, vader_result, tb_result)
-
-
-# ─────────────────────────────────────────────
-#  Entry point
-# ─────────────────────────────────────────────
 if __name__ == "__main__":
     run_demo()          # Show built-in demo first
     interactive_mode()  # Then let user type their own text
